@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9556491-ed48-4da1-8ae7-8a8a981c51e3" name="Changes" comment="" />
+    <list default="true" id="e9556491-ed48-4da1-8ae7-8a8a981c51e3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/finalmelontoken/sharestudying/global/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/finalmelontoken/sharestudying/global/config/SecurityConfig.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -49,6 +51,7 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "preferences.pluginManager",
+    "spring.configuration.checksum": "99829184ded8a1ed075423352927e234",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -93,6 +96,7 @@
       <option name="presentableId" value="Default" />
       <updated>1689689601077</updated>
       <workItem from="1689689603775" duration="5138000" />
+      <workItem from="1689763918894" duration="58000" />
     </task>
     <servers />
   </component>
