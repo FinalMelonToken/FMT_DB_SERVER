@@ -1,4 +1,4 @@
-package finalmelontoken.sharestudying.domain.member.auth.jwt;
+package finalmelontoken.sharestudying.global.config.auth.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
