@@ -1,4 +1,4 @@
-package finalmelontoken.sharestudying.domain.board.service.dto;
+package finalmelontoken.sharestudying.domain.board.service.response;
 
 import lombok.Getter;
 import finalmelontoken.sharestudying.domain.board.entity.Board;

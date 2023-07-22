@@ -1,14 +1,16 @@
 package finalmelontoken.sharestudying.domain.board.service;
 
 import finalmelontoken.sharestudying.domain.board.repository.BoardRepository;
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardCreateRequestDto;
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardListResponseDto;
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardResponseDto;
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardUpdateRequestDto;
+import finalmelontoken.sharestudying.domain.board.service.request.BoardCreateRequestDto;
+import finalmelontoken.sharestudying.domain.board.service.response.BoardListResponseDto;
+import finalmelontoken.sharestudying.domain.board.service.response.BoardResponseDto;
+import finalmelontoken.sharestudying.domain.board.service.request.BoardUpdateRequestDto;
+import finalmelontoken.sharestudying.global.exception.GlobalException;
 import lombok.RequiredArgsConstructor;
 import org.commonmark.node.Node;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import finalmelontoken.sharestudying.domain.board.entity.Board;
@@ -28,25 +30,22 @@ public class BoardService {
     @Transactional
     public Long update(Long id, BoardUpdateRequestDto requestDto) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new
-                        IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
-
-        board.update(requestDto.getTitle(),
-                requestDto.getContent());
+                .orElseThrow(() -> new GlobalException(HttpStatus.NOT_FOUND, "해당 게시글이 존재하지 않습니다."));
+        board.update(requestDto.getTitle(), requestDto.getContent());
 
         return id;
     }
     @Transactional
     public void delete(Long id){
         Board board = boardRepository.findById(id)
-                .orElseThrow(() ->new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
+                .orElseThrow(() ->new GlobalException(HttpStatus.NOT_FOUND, "해당 게시글이 존재하지 않습니다."));
 
         boardRepository.delete(board);
     }
     @Transactional(readOnly = true)
     public BoardResponseDto searchById(Long id) {
         Board board = boardRepository.findById(id).orElseThrow(()
-                -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
+                -> new GlobalException(HttpStatus.NOT_FOUND, "해당 게시글이 존재하지 않습니다."));
 
         return new BoardResponseDto(board);
     }

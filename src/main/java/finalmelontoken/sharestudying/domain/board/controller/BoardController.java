@@ -1,9 +1,9 @@
 package finalmelontoken.sharestudying.domain.board.controller;
 
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardCreateRequestDto;
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardListResponseDto;
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardResponseDto;
-import finalmelontoken.sharestudying.domain.board.service.dto.BoardUpdateRequestDto;
+import finalmelontoken.sharestudying.domain.board.service.request.BoardCreateRequestDto;
+import finalmelontoken.sharestudying.domain.board.service.response.BoardListResponseDto;
+import finalmelontoken.sharestudying.domain.board.service.response.BoardResponseDto;
+import finalmelontoken.sharestudying.domain.board.service.request.BoardUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import finalmelontoken.sharestudying.domain.board.service.BoardService;

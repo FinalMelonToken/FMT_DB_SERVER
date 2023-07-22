@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public class GlovalException extends RuntimeException {
+public class GlobalException extends RuntimeException {
     private final HttpStatus httpStatus;
     private String message;
 }

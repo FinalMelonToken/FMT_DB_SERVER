@@ -1,4 +1,4 @@
-package finalmelontoken.sharestudying.domain.board.service.dto;
+package finalmelontoken.sharestudying.domain.board.service.request;
 
 import lombok.Builder;
 import lombok.Getter;
