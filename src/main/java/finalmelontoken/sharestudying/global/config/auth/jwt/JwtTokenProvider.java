@@ -32,36 +32,36 @@ public class JwtTokenProvider {
         this.refreshKey = Keys.hmacShaKeyFor(refreshKeyBytes);
     }
 
-    // 유저 정보를 가지고 AccessToken, RefreshToken 을 생성하는 메서드
-    public TokenInfo generateToken(Authentication authentication, String refreshCode) {
-
-        String authorities = authentication.getAuthorities().stream()
-                .map(GrantedAuthority::getAuthority)
-                .collect(Collectors.joining(","));
-
-        long now = (new Date()).getTime();
-        // Access Token 생성
-        Date accessTokenExpiresIn = new Date(now + (60000 * 60));  // 1시간
-        String accessToken = Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim("auth", authorities)
-                .setExpiration(accessTokenExpiresIn)
-                .signWith(accessKey, SignatureAlgorithm.HS256)
-                .compact();
-
-        String refreshToken = Jwts.builder()
-                .setSubject(authentication.getName())
-                .claim("code", refreshCode)
-                .setExpiration(new Date(now + (60000 * 60 * 24 * 7)))   // 1주
-                .signWith(refreshKey, SignatureAlgorithm.HS256)
-                .compact();
-
-        return TokenInfo.builder()
-                .grantType("Bearer")
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .build();
-    }
+//    // 유저 정보를 가지고 AccessToken, RefreshToken 을 생성하는 메서드
+//    public TokenInfo generateToken(Authentication authentication, String refreshCode) {
+//
+//        String authorities = authentication.getAuthorities().stream()
+//                .map(GrantedAuthority::getAuthority)
+//                .collect(Collectors.joining(","));
+//
+//        long now = (new Date()).getTime();
+//        // Access Token 생성
+//        Date accessTokenExpiresIn = new Date(now + (60000 * 60));  // 1시간
+//        String accessToken = Jwts.builder()
+//                .setSubject(authentication.getName())
+//                .claim("auth", authorities)
+//                .setExpiration(accessTokenExpiresIn)
+//                .signWith(accessKey, SignatureAlgorithm.HS256)
+//                .compact();
+//
+//        String refreshToken = Jwts.builder()
+//                .setSubject(authentication.getName())
+//                .claim("code", refreshCode)
+//                .setExpiration(new Date(now + (60000 * 60 * 24 * 7)))   // 1주
+//                .signWith(refreshKey, SignatureAlgorithm.HS256)
+//                .compact();
+//
+//        return TokenInfo.builder()
+//                .grantType("Bearer")
+//                .accessToken(accessToken)
+//                .refreshToken(refreshToken)
+//                .build();
+//    }
 
     // JWT 토큰을 복호화하여 토큰에 들어있는 정보를 꺼내는 메서드
     public Authentication getAuthentication(String accessToken) {
@@ -83,7 +83,7 @@ public class JwtTokenProvider {
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     }
 
-    public boolean validateToken(String token) {
+    public boolean validateAccessToken(String token) {
         try {
             Jwts.parser().setSigningKey(accessKey).parseClaimsJws(token);
             return true;
@@ -99,20 +99,20 @@ public class JwtTokenProvider {
     }
 
     // refresh 토큰 정보를 검증하는 메서드
-    public boolean validateRefreshToken(String token) {
-        try {
-            Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(token).getBody();
-            return true;
-        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid JWT Token");
-        } catch (ExpiredJwtException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expired JWT Token");
-        } catch (UnsupportedJwtException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsupported JWT Token");
-        } catch (IllegalArgumentException e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "JWT claims string is empty.");
-        }
-    }
+//    public boolean validateRefreshToken(String token) {
+//        try {
+//            Jwts.parser().setSigningKey(refreshKey).parseClaimsJws(token).getBody();
+//            return true;
+//        } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Invalid JWT Token");
+//        } catch (ExpiredJwtException e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Expired JWT Token");
+//        } catch (UnsupportedJwtException e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Unsupported JWT Token");
+//        } catch (IllegalArgumentException e) {
+//            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "JWT claims string is empty.");
+//        }
+//    }
 
     /**
      * refresh 토큰의 Claim 디코딩

@@ -1,4 +1,4 @@
-package finalmelontoken.sharestudying.domain.member.entity;
+package finalmelontoken.sharestudying.domain.user.entity;
 
 
 import jakarta.persistence.*;
@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @DynamicUpdate
 @Data
-public class Member {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id; //기본키
@@ -36,8 +36,8 @@ public class Member {
     @OneToMany(mappedBy = "member", cascade = CascadeType.MERGE, orphanRemoval = true)
     private List<Board> board = new ArrayList<>();
     @Builder
-    public Member(String name, String password, String email, Role role,
-                  String providerId) {
+    public User(String name, String password, String email, Role role,
+                String providerId) {
         this.name = name;
         this.password = password;
         this.email = email;

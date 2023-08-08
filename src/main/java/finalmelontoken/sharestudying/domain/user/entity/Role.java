@@ -1,4 +1,4 @@
-package finalmelontoken.sharestudying.domain.member.entity;
+package finalmelontoken.sharestudying.domain.user.entity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

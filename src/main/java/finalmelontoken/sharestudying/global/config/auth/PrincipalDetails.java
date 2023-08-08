@@ -1,7 +1,7 @@
 package finalmelontoken.sharestudying.global.config.auth;
 
 
-import finalmelontoken.sharestudying.domain.member.entity.Member;
+import finalmelontoken.sharestudying.domain.user.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,14 +14,14 @@ import java.util.Map;
 
 @Data
 public class PrincipalDetails implements OAuth2User {
-    private Member member;
+    private User member;
     private Map<String, Object> attributes;
 
-    public PrincipalDetails(Member member) {
+    public PrincipalDetails(User member) {
         this.member=member;
     }
 
-    public PrincipalDetails(Member member, Map<String, Object> attributes) {
+    public PrincipalDetails(User member, Map<String, Object> attributes) {
         this.member=member;
         this.attributes=attributes;
     }

@@ -1,6 +1,6 @@
 package finalmelontoken.sharestudying.domain.board.entity;
 
-import finalmelontoken.sharestudying.domain.member.entity.Member;
+import finalmelontoken.sharestudying.domain.user.entity.User;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Data;
@@ -22,9 +22,9 @@ public class Board {
     @Column(columnDefinition = "TEXT",name="content", nullable = false)
     private String content;
 
-    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = Member.class)
+    @ManyToOne(cascade = CascadeType.MERGE, targetEntity = User.class)
     @JoinColumn(name = "member_id", updatable = false)
-    private Member member;
+    private User member;
 
     @Builder
     public Board(String title, String content) {
