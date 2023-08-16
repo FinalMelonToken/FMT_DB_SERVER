@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final BCryptPasswordEncoder encoder;
-    private final UserRepository memberRepository;
+    private final UserRepository userRepository;
 }

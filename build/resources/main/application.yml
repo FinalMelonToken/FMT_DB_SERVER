@@ -1,23 +1,25 @@
 spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 924974325932-vidksk9nslq2qusvn7pt8abff3hdjvcg.apps.googleusercontent.com
-            client-secret: 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
-            scope:
-            - profile
-            - email
+
   datasource:
-    url: jdbc:mysql://localhost:3306/ShareStudying
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/ShareStudying?serverTimezone=Asia/Seoul
     username: root
     password: lyi98549854
+    hikari:
+      maximum-pool-size: 20
+
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    open-in-view: false
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 1000
+
 jwt:
   access:
     secret: fske256d3433kf2er454ddd35435rddkzfefdsdfjldkjfdxfd5dsfx2432dszdfdsfsfs12xdfds2sa

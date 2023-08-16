@@ -23,4 +23,4 @@ public class SecurityConfig {
                 .anyRequest().permitAll(); //나머지 uri는 모든 접근 허용
          return http.build();
     }
-}
+} 
