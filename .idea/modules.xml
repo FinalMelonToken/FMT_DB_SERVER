@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/FMT_DB_SERVER.shareStudying.main.iml" filepath="$PROJECT_DIR$/.idea/modules/FMT_DB_SERVER.shareStudying.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/shareStudying.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shareStudying.main.iml" />
     </modules>
   </component>

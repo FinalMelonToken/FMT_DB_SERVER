@@ -54,6 +54,7 @@ public class BoardController {
     public void delete(@PathVariable Long id){
         boardService.delete(id);
     }
+<<<<<<< HEAD
     private void viewCountUp(Long id, HttpServletRequest req, HttpServletResponse res) {
 
         Cookie oldCookie = null;
@@ -84,3 +85,6 @@ public class BoardController {
         }
     }
 }
+=======
+}
+>>>>>>> kdc
