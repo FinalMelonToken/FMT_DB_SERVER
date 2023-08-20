@@ -2,9 +2,7 @@ package finalmelontoken.sharestudying.domain.board.entity;
 
 import finalmelontoken.sharestudying.domain.user.entity.User;
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
@@ -14,7 +12,8 @@ import java.util.List;
 @Table(name = "board")
 @NoArgsConstructor
 @Entity
-@Data
+@Getter
+@Setter
 public class Board extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,8 +26,8 @@ public class Board extends BaseEntity{
     @Column(columnDefinition = "TEXT", name="content", nullable = false)
     private String content;
 
-    @Column(name = "view_count", nullable = false)
-    private int viewCount;
+    @Column(name = "view_count", nullable = false, columnDefinition = "INT default 0")
+    private Integer viewCount =0 ;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id") // user_id 컬럼과 연결
@@ -47,5 +46,9 @@ public class Board extends BaseEntity{
     public void update(String title, String content) {
         this.title = title;
         this.content = content;
+    }
+
+    public void addViewCount() {
+        this.viewCount++;
     }
 }

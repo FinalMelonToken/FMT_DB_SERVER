@@ -26,4 +26,4 @@ jwt:
   refresh:
     secret: fske256d3433kf2er454ddd35435rddkzfefdsdfjldkjfdxfd5dsfx2432dszdfdsfsfs12xdfds2sa
 server:
-  port: 3000
+  port: 8088

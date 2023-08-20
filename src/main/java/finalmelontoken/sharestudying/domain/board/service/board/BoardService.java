@@ -4,12 +4,13 @@ import finalmelontoken.sharestudying.domain.board.repository.BoardRepository;
 import finalmelontoken.sharestudying.domain.board.service.board.req.BoardCreateRequestDto;
 import finalmelontoken.sharestudying.domain.board.service.board.req.BoardUpdateRequestDto;
 import finalmelontoken.sharestudying.domain.board.service.board.res.BoardResponseDto;
-import finalmelontoken.sharestudying.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Service
@@ -55,7 +56,6 @@ public class BoardService {
                 .viewCount(board.getViewCount())
                 .build();
     }
-
 //    @Transactional(readOnly = true)
 //    public Page<Board> searchAllPaged(Pageable pageable) {
 //        return boardRepository.findAll(pageable);
@@ -65,15 +65,25 @@ public class BoardService {
         return boardRepository.findAllWithUsers(pageable);
     }
 
-
-    @Transactional
-    public void viewCountUp(Long boardId) {
-
-    }
 //    private String convertToHtml(String markdownContent) {
 //        Parser parser = Parser.builder().build();
 //        Node document = parser.parse(markdownContent);
 //        HtmlRenderer renderer = HtmlRenderer.builder().build();
 //        return renderer.render(document);
 //    }
+    @Transactional
+    public Page<BoardResponseDto> boardSearchList(String searchKeyword, Pageable pageable) {
+        Page<Board> boardPage = boardRepository.findByTitleContaining(searchKeyword, pageable);
+
+        return boardPage.map(board -> {
+            BoardResponseDto responseDto = new BoardResponseDto();
+            responseDto.setId(board.getBoardId());
+            responseDto.setTitle(board.getTitle());
+            responseDto.setContent(board.getContent());
+            responseDto.setViewCount(board.getViewCount());
+            responseDto.setCreateTime(board.getCreatedDate());
+            responseDto.setModifyTime(board.getModifiedDate());
+            return responseDto;
+        });
+    }
 }
