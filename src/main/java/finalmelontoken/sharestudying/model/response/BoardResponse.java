@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BoardResponseDto {
+public class BoardResponse {
     private Long id;
     private String title;
     private String content;
@@ -17,7 +17,7 @@ public class BoardResponseDto {
     private Integer viewCount;
 
     @Builder
-    public BoardResponseDto(Long id, String title, String content, LocalDateTime createTime, LocalDateTime modifyTime, Integer viewCount) {
+    public BoardResponse(Long id, String title, String content, LocalDateTime createTime, LocalDateTime modifyTime, Integer viewCount) {
         this.id = id;
         this.title = title;
         this.content = content;
@@ -27,7 +27,7 @@ public class BoardResponseDto {
     }
 
     // Board 객체로부터 생성하는 생성자 추가
-    public BoardResponseDto(Board board) {
+    public BoardResponse(Board board) {
         this.id = board.getBoardId();
         this.title = board.getTitle();
         this.content = board.getContent();

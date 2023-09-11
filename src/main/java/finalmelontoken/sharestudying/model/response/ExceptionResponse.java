@@ -1,4 +1,4 @@
-package finalmelontoken.sharestudying.exception;
+package finalmelontoken.sharestudying.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Setter
 @Builder
 @AllArgsConstructor
-public class ExceptionResponseDto {
+public class ExceptionResponse {
     @JsonProperty(value = "timestamp", index = 1)
     private final String timeStamp = LocalDateTime.now().toString();
     private final int status;

@@ -1,9 +1,9 @@
 package finalmelontoken.sharestudying.service;
 import finalmelontoken.sharestudying.model.entity.Board;
 import finalmelontoken.sharestudying.repository.BoardRepository;
-import finalmelontoken.sharestudying.model.request.BoardCreateRequestDto;
-import finalmelontoken.sharestudying.model.request.BoardUpdateRequestDto;
-import finalmelontoken.sharestudying.model.response.BoardResponseDto;
+import finalmelontoken.sharestudying.model.request.BoardCreateRequest;
+import finalmelontoken.sharestudying.model.request.BoardUpdateRequest;
+import finalmelontoken.sharestudying.model.response.BoardResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,14 +16,14 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Transactional
-    public Long create(BoardCreateRequestDto req) {
+    public Long create(BoardCreateRequest req) {
 //        String htmlContent = convertToHtml(requestDto.getContent());
 
         return boardRepository.save(req.toEntity()).getBoardId();
 
     }
     @Transactional
-    public Long update(Long id, BoardUpdateRequestDto requestDto) {
+    public Long update(Long id, BoardUpdateRequest requestDto) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new
                         IllegalArgumentException("해당 게시글이 존재하지 않습니다."));
@@ -40,11 +40,11 @@ public class BoardService {
         boardRepository.delete(board);
     }
     @Transactional(readOnly = true)
-    public BoardResponseDto searchById(Long id) {
+    public BoardResponse searchById(Long id) {
         Board board = boardRepository.findById(id).orElseThrow(()
                 -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
 
-        return BoardResponseDto.builder()
+        return BoardResponse.builder()
                 .id(board.getBoardId())
                 .title(board.getTitle())
                 .content(board.getContent())
@@ -59,7 +59,7 @@ public class BoardService {
 //        return boardRepository.findAll(pageable);
 //    }
     @Transactional(readOnly = true)
-    public Page<BoardResponseDto> searchAllPaged(Pageable pageable) {
+    public Page<BoardResponse> searchAllPaged(Pageable pageable) {
         return boardRepository.findAllWithUsers(pageable);
     }
 
@@ -70,11 +70,11 @@ public class BoardService {
 //        return renderer.render(document);
 //    }
     @Transactional
-    public Page<BoardResponseDto> boardSearchList(String searchKeyword, Pageable pageable) {
+    public Page<BoardResponse> boardSearchList(String searchKeyword, Pageable pageable) {
         Page<Board> boardPage = boardRepository.findByTitleContaining(searchKeyword, pageable);
 
         return boardPage.map(board -> {
-            BoardResponseDto responseDto = new BoardResponseDto();
+            BoardResponse responseDto = new BoardResponse();
             responseDto.setId(board.getBoardId());
             responseDto.setTitle(board.getTitle());
             responseDto.setContent(board.getContent());

@@ -8,14 +8,14 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class BoardUpdateRequestDto {
+public class BoardUpdateRequest {
     private String title;
     private String content;
     private LocalDateTime modifiedDate = LocalDateTime.now();
 
 
     @Builder
-    public BoardUpdateRequestDto(String title, String content) {
+    public BoardUpdateRequest(String title, String content) {
         this.title = title;
         this.content = content;
     }

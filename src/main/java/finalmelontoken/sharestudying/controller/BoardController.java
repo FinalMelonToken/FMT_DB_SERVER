@@ -2,9 +2,9 @@
 
 import finalmelontoken.sharestudying.model.entity.Board;
 import finalmelontoken.sharestudying.repository.BoardRepository;
-import finalmelontoken.sharestudying.model.request.BoardCreateRequestDto;
-import finalmelontoken.sharestudying.model.response.BoardResponseDto;
-import finalmelontoken.sharestudying.model.request.BoardUpdateRequestDto;
+import finalmelontoken.sharestudying.model.request.BoardCreateRequest;
+import finalmelontoken.sharestudying.model.response.BoardResponse;
+import finalmelontoken.sharestudying.model.request.BoardUpdateRequest;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,22 +30,22 @@ public class BoardController {
     private final BoardRepository boardRepository;
 
     @PostMapping("/write")
-    public void create(@RequestBody BoardCreateRequestDto requestDto) {
+    public void create(@RequestBody BoardCreateRequest requestDto) {
         boardService.create(requestDto);
     }
 
     @PutMapping("/{id}")
     public Long update(
             @PathVariable Long id,
-            @RequestBody BoardUpdateRequestDto requestDto
+            @RequestBody BoardUpdateRequest requestDto
     ) {
         return boardService.update(id, requestDto);
     }
     @GetMapping("/{id}")
-    public BoardResponseDto searchById(@PathVariable("id") Long id,
-                                       HttpServletRequest request,
-                                       HttpServletResponse response,
-                                       Model model) {
+    public BoardResponse searchById(@PathVariable("id") Long id,
+                                    HttpServletRequest request,
+                                    HttpServletResponse response,
+                                    Model model) {
         Board board;
         board = boardRepository.findById(id).orElseThrow(()
                 -> new IllegalArgumentException("해당 게시물이 존재하지 않습니다."));
@@ -59,7 +59,7 @@ public class BoardController {
         }
 
         // BoardResponseDto 객체 생성 및 리턴
-        return new BoardResponseDto(board);
+        return new BoardResponse(board);
     }
 
     private boolean handleViewCountAndCookie(Board board, HttpServletRequest request, HttpServletResponse response) {
@@ -98,7 +98,7 @@ public class BoardController {
             @PageableDefault(page = 0, size = 10, sort = "boardId", direction = Sort.Direction.DESC) Pageable pageable,
             String searchKeyword) {
 
-        Page<BoardResponseDto> list;
+        Page<BoardResponse> list;
 
         if (searchKeyword == null) {
             list = boardService.searchAllPaged(pageable);

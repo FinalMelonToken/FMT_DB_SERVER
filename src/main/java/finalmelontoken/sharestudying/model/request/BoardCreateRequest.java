@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
-public class BoardCreateRequestDto {
+public class BoardCreateRequest {
     private String title;
     private String content;
     private String name;
@@ -28,7 +28,7 @@ public class BoardCreateRequestDto {
     }
 
     @Builder
-    public BoardCreateRequestDto(String name, String title, String content, Long userId, Long boardId) {
+    public BoardCreateRequest(String name, String title, String content, Long userId, Long boardId) {
         this.title = title;
         this.content = content;
         this.name = name;
